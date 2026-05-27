@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Login</title>
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7);
+    }
+
+    .login-box{
+      width:350px;
+      background:#fff;
+      padding:35px;
+      border-radius:20px;
+      text-align:center;
+    }
+
+    h1{
+      margin-bottom:20px;
+      color:#333;
+    }
+
+    input{
+      width:100%;
+      padding:14px;
+      margin-bottom:15px;
+      border:none;
+      border-radius:12px;
+      background:#f1f1f1;
+      outline:none;
+    }
+
+    button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#ee2a7b;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    i{
+      margin-right:8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h1><i class="fa-brands fa-instagram"></i>Instagram</h1>
+
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+
+    <button>Login with Instagram</button>
+  </div>
+
+</body>
+</html>
