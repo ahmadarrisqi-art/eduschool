@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduSchool Landing Page</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f7f8fc;
+  color:#1f2937;
+  overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  background:rgba(255,255,255,0.85);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  z-index:1000;
+  box-shadow:0 8px 30px rgba(0,0,0,0.05);
+
+  opacity:0;
+  transform:translateY(-40px);
+  animation:navAnim 1s ease forwards;
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:1.5rem;
+  font-weight:800;
+  color:#2563eb;
+}
+
+.menu{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  color:#334155;
+  font-weight:500;
+  transition:.3s;
+}
+
+.menu a:hover{
+  color:#2563eb;
+}
+
+/* BUTTON */
+
+.btn{
+  padding:10px 24px;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
+}
+
+.signin-btn{
+  background:white;
+  color:#2563eb;
+  border:2px solid #2563eb;
+}
+
+.signin-btn:hover{
+  background:#2563eb;
+  color:white;
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 10px 25px rgba(37,99,235,0.25);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  background:linear-gradient(135deg,#1d4ed8,#2563eb);
+  display:flex;
+  align-items:center;
+  padding:120px 24px 60px;
+  color:white;
+}
+
+.hero-wrap{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.hero-text{
+  opacity:0;
+  transform:translateX(-80px);
+  animation:textAnim 1.2s ease forwards;
+  animation-delay:0.3s;
+}
+
+.hero h1{
+  font-size:3.2rem;
+  line-height:1.2;
+  margin-bottom:20px;
+
+  animation:glowText 2s infinite alternate;
+}
+
+.hero p{
+  line-height:1.8;
+  margin-bottom:28px;
+  opacity:.95;
+}
+
+.hero-image{
+  perspective:1000px;
+
+  opacity:0;
+  transform:translateX(80px);
+  animation:imageAnim 1.2s ease forwards;
+  animation-delay:0.5s;
+}
+
+.floating-card{
+  background:transparent;
+  padding:0;
+  border-radius:30px;
+  box-shadow:none;
+  transition:transform .15s ease;
+
+  animation:floatCard 3s ease-in-out infinite;
+}
+
+.floating-card img{
+  width:100%;
+  border-radius:20px;
+  display:block;
+  background:transparent;
+}
+
+/* SECTION */
+
+section{
+  padding:90px 24px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  font-size:2.3rem;
+  margin-bottom:55px;
+  font-weight:700;
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+  transition:.3s;
+  cursor:pointer;
+
+  opacity:0;
+  transform:translateY(40px);
+  animation:cardAnim 1s ease forwards;
+}
+
+.card:nth-child(1){
+  animation-delay:0.3s;
+}
+
+.card:nth-child(2){
+  animation-delay:0.5s;
+}
+
+.card:nth-child(3){
+  animation-delay:0.7s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+}
+
+.card h3{
+  margin-bottom:14px;
+  font-size:1.3rem;
+}
+
+.card p{
+  color:#64748b;
+  line-height:1.7;
+}
+
+/* TEACHER CARD */
+
+.teacher-card{
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+  transition:.3s;
+
+  opacity:0;
+  transform:translateY(40px);
+  animation:teacherAnim 1s ease forwards;
+}
+
+.teacher-card:nth-child(1){
+  animation-delay:0.4s;
+}
+
+.teacher-card:nth-child(2){
+  animation-delay:0.6s;
+}
+
+.teacher-card:nth-child(3){
+  animation-delay:0.8s;
+}
+
+.teacher-card:hover{
+  transform:translateY(-8px);
+}
+
+.teacher-card img{
+  width:220px;
+  height:220px;
+  object-fit:cover;
+  border-radius:50%;
+  margin:auto;
+  display:block;
+  margin-bottom:20px;
+  border:5px solid #eff6ff;
+}
+
+.teacher-card h3{
+  font-size:1.3rem;
+  margin-bottom:8px;
+}
+
+.teacher-card p{
+  color:#64748b;
+}
+
+/* FOOTER */
+
+footer{
+  background:#0f172a;
+  color:white;
+  padding:50px 24px;
+}
+
+.footer-wrap{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+footer h3{
+  margin-bottom:16px;
+}
+
+footer a{
+  display:block;
+  text-decoration:none;
+  color:#cbd5e1;
+  margin-bottom:10px;
+  transition:.3s;
+}
+
+footer a:hover{
+  color:white;
+  transform:translateX(3px);
+}
+
+.copyright{
+  margin-top:40px;
+  text-align:center;
+  color:#94a3b8;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:20px;
+}
+
+/* KEYFRAMES */
+
+@keyframes navAnim{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes textAnim{
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes imageAnim{
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes cardAnim{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes teacherAnim{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes floatCard{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+@keyframes glowText{
+
+  from{
+    text-shadow:0 0 10px rgba(255,255,255,0.2);
+  }
+
+  to{
+    text-shadow:0 0 28px rgba(255,255,255,0.7);
+  }
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .hero-wrap{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:2.3rem;
+  }
+
+  .menu{
+    display:none;
+  }
+
+  .teacher-card img{
+    width:180px;
+    height:180px;
+  }
+
+}
+
+</style>
+
+  </style>
+</head>
+<body>
+
+<header>
+
+  <div class="nav">
+
+    <div class="logo">EduSchool</div>
+
+    <div class="menu">
+
+      <a href="#programs">Programs</a>
+      <a href="#teachers">Teachers</a>
+
+      <button
+  class="btn signin-btn"
+  onclick="window.location.href='tampilan-signin.html'">
+
+  Sign In
+
+</button>
+
+    </div>
+
+  </div>
+
+</header>
+
+<section class="hero">
+
+  <div class="hero-wrap">
+
+    <div class="hero-text">
+
+      <h1>Equipping You With Skills That Matter</h1>
+
+      <p>
+        Website edukasi modern dengan animasi interaktif,
+        tampilan premium, dan efek gerak mengikuti kursor.
+      </p>
+
+      <button
+        class="btn signin-btn"
+        onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">
+
+        Explore Now
+
+      </button>
+
+    </div>
+
+    <div class="hero-image">
+
+      <div class="floating-card" id="floatingCard">
+
+        <img
+          src="teacher4-removebg-preview.png"
+          alt="students">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="programs">
+
+  <div class="container">
+
+    <h2 class="section-title">Our Programs</h2>
+
+    <div class="grid">
+
+      <div class="card" onclick="window.location.href='english-program.html'">
+
+        <h3>English with Native Speakers</h3>
+
+        <p>
+          Learn speaking, pronunciation, grammar,
+          and confidence directly with interactive teaching.
+        </p>
+
+      </div>
+
+      <div class="card" onclick="window.location.href='japenese-program.html'">
+
+        <h3>Japanese for Mathematics</h3>
+
+        <p>
+          Master Japanese language skills combined
+          with mathematics understanding.
+        </p>
+
+      </div>
+
+      <div class="card" onclick="window.location.href='corporate-program.html'">
+
+        <h3>Corporate Training Program</h3>
+
+        <p>
+          Professional training for communication,
+          teamwork, and leadership.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="teachers">
+
+  <div class="container">
+
+    <h2 class="section-title">Our Teachers</h2>
+
+    <div class="grid">
+
+      <div class="teacher-card">
+
+        <img src="teacher1.png" alt="teacher">
+
+        <h3>Tia</h3>
+
+        <p>Indonesian Teacher</p>
+
+      </div>
+
+      <div class="teacher-card">
+
+        <img src="teacher3.png" alt="teacher">
+
+        <h3>nadia</h3>
+
+        <p>Japanese Language teacher</p>
+
+      </div>
+
+      <div class="teacher-card">
+
+        <img src="teacher2.png" alt="teacher">
+
+        <h3>jackson</h3>
+
+        <p>english Language teacher</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="footer-wrap">
+
+    <div>
+
+      <h3>EduSchool</h3>
+
+      <p>
+        Interactive education landing page with modern design.
+      </p>
+
+    </div>
+
+    <div>
+
+      <h3>Programs</h3>
+
+      <a href="english-program.html">
+        English with Native Speakers
+      </a>
+
+      <a href="japenese-program.html">
+        Japanese Mathematics
+      </a>
+
+      <a href="corporate-program.html">
+        Corporate Training
+      </a>
+
+    </div>
+
+    <div>
+
+      <h3>Contact</h3>
+
+      <a href="tampilan -login-ig.html">Instagram</a>
+      <a href="tampilan-login-wa.html">WhatsApp</a>
+      <a href="tampilan-login-email.html">Email</a>
+
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 EduSchool — Interactive Landing Page
+  </div>
+
+</footer>
+
+<script>
+
+const card = document.getElementById("floatingCard");
+
+document.addEventListener("mousemove", (e) => {
+
+  const x = (window.innerWidth / 2 - e.pageX) / 35;
+  const y = (window.innerHeight / 2 - e.pageY) / 35;
+
+  card.style.transform =
+    `rotateY(${x}deg) rotateX(${-y}deg)`;
+
+});
+
+</script>
+
+</body>
+</html>
