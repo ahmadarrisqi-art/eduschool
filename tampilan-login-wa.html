@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f2f5;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .wa-card {
+      background: #fff;
+      border-radius: 20px;
+      width: 360px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    }
+
+    /* HEADER */
+    .wa-header {
+      background: #075E54;
+      padding: 2rem 2rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .wa-bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .wa-header-inner { position: relative; z-index: 2; }
+    .wa-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .wa-logo-icon {
+      width: 42px; height: 42px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wa-logo-icon i { color: #fff; font-size: 22px; }
+    .wa-logo-text { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+    .wa-tagline { color: rgba(255,255,255,0.75); font-size: 13px; line-height: 1.6; }
+
+    /* BODY */
+    .wa-body { padding: 1.75rem 1.75rem 2rem; }
+
+    .wa-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border: 0.5px solid #d1d5db;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .wa-tab {
+      flex: 1;
+      padding: 9px 0;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      transition: background 0.15s, color 0.15s;
+    }
+    .wa-tab.active { background: #25D366; color: #fff; }
+
+    .wa-label {
+      display: block;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .wa-field { margin-bottom: 1rem; }
+
+    .wa-phone-row { display: flex; gap: 8px; }
+    .wa-country-select {
+      width: 85px;
+      background: #f9fafb;
+      border: 0.5px solid #d1d5db;
+      border-radius: 10px;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-family: inherit;
+      color: #111827;
+      cursor: pointer;
+    }
+    .wa-input {
+      width: 100%;
+      background: #f9fafb;
+      border: 0.5px solid #d1d5db;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .wa-input:focus {
+      border-color: #25D366;
+      box-shadow: 0 0 0 3px rgba(37,211,102,0.12);
+    }
+
+    .wa-input-pw { position: relative; }
+    .wa-input-pw input { padding-right: 42px; }
+    .wa-eye {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .wa-check-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0.75rem 0 1.25rem;
+    }
+    .wa-check { width: 16px; height: 16px; accent-color: #25D366; cursor: pointer; }
+    .wa-check-label { font-size: 12.5px; color: #6b7280; }
+    .wa-forgot { font-size: 12.5px; color: #25D366; font-weight: 600; cursor: pointer; text-decoration: none; }
+
+    .wa-progress {
+      display: none;
+      margin: 0.75rem 0 0;
+      height: 3px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .wa-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #25D366;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .wa-btn {
+      width: 100%;
+      background: #25D366;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 0.25rem;
+      letter-spacing: 0.3px;
+    }
+    .wa-btn:hover { background: #1fbd5a; }
+    .wa-btn:active { transform: scale(0.98); }
+
+    .wa-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 1.25rem 0;
+    }
+    .wa-divider-line { flex: 1; height: 0.5px; background: #e5e7eb; }
+    .wa-divider-text { font-size: 12px; color: #9ca3af; }
+
+    .wa-qr-btn {
+      width: 100%;
+      background: transparent;
+      border: 0.5px solid #d1d5db;
+      border-radius: 12px;
+      padding: 11px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      color: #374151;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .wa-qr-btn:hover { background: #f3f4f6; }
+
+    .wa-footer {
+      text-align: center;
+      margin-top: 1.25rem;
+      font-size: 12.5px;
+      color: #6b7280;
+    }
+    .wa-footer a { color: #25D366; font-weight: 600; text-decoration: none; cursor: pointer; }
+
+    /* QR SECTION */
+    #qr-form { display: none; text-align: center; }
+    .wa-qr-box {
+      display: inline-block;
+      padding: 16px;
+      border: 0.5px solid #d1d5db;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+    }
+    .wa-qr-desc { font-size: 13px; color: #6b7280; margin-bottom: 0.5rem; }
+    .wa-qr-sub { font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+
+<div class="wa-card">
+  <!-- HEADER -->
+  <div class="wa-header">
+    <div class="wa-bubble" style="width:120px;height:120px;top:-40px;right:-30px;"></div>
+    <div class="wa-bubble" style="width:70px;height:70px;bottom:10px;left:-20px;"></div>
+    <div class="wa-header-inner">
+      <div class="wa-logo">
+        <div class="wa-logo-icon">
+          <i class="ti ti-brand-whatsapp"></i>
+        </div>
+        <span class="wa-logo-text">WhatsApp</span>
+      </div>
+      <p class="wa-tagline">Selamat datang kembali!<br>Masuk untuk melanjutkan obrolan.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="wa-body">
+    <!-- TABS -->
+    <div class="wa-tabs">
+      <button class="wa-tab active" onclick="switchTab(this,'phone')">Nomor HP</button>
+      <button class="wa-tab" onclick="switchTab(this,'qr')">Kode QR</button>
+    </div>
+
+    <!-- PHONE FORM -->
+    <div id="phone-form">
+      <div class="wa-field">
+        <label class="wa-label" for="phone">Nomor WhatsApp</label>
+        <div class="wa-phone-row">
+          <select class="wa-country-select" id="country" title="Kode negara">
+            <option>🇮🇩 +62</option>
+            <option>🇺🇸 +1</option>
+            <option>🇬🇧 +44</option>
+            <option>🇸🇬 +65</option>
+            <option>🇲🇾 +60</option>
+          </select>
+          <input type="tel" id="phone" class="wa-input" placeholder="8xx-xxxx-xxxx" />
+        </div>
+      </div>
+
+      <div class="wa-field">
+        <label class="wa-label" for="pw-input">Kata Sandi</label>
+        <div class="wa-input-pw">
+          <input type="password" id="pw-input" class="wa-input" placeholder="Masukkan kata sandi" />
+          <span class="wa-eye" onclick="togglePw()" id="eye-icon">
+            <i class="ti ti-eye"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="wa-check-row">
+        <input type="checkbox" class="wa-check" id="remember" />
+        <label class="wa-check-label" for="remember">Ingat perangkat ini</label>
+        <span style="flex:1"></span>
+        <a class="wa-forgot">Lupa sandi?</a>
+      </div>
+
+      <div class="wa-progress" id="progress">
+        <div class="wa-progress-bar" id="progress-bar"></div>
+      </div>
+
+      <button class="wa-btn" onclick="doLogin()">Masuk</button>
+
+      <div class="wa-divider">
+        <div class="wa-divider-line"></div>
+        <span class="wa-divider-text">atau</span>
+        <div class="wa-divider-line"></div>
+      </div>
+
+      <button class="wa-qr-btn" onclick="switchToQR()">
+        <i class="ti ti-qrcode" style="font-size:18px;"></i>
+        Masuk dengan kode QR
+      </button>
+
+      <div class="wa-footer">
+        Belum punya akun? <a href="#">Daftar sekarang</a>
+      </div>
+    </div>
+
+    <!-- QR FORM -->
+    <div id="qr-form">
+      <div class="wa-qr-box">
+        <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="140" fill="#fff"/>
+          <g fill="#111827">
+            <!-- Top-left finder -->
+            <rect x="10" y="10" width="8" height="8"/><rect x="18" y="10" width="8" height="8"/><rect x="26" y="10" width="8" height="8"/><rect x="34" y="10" width="8" height="8"/><rect x="42" y="10" width="8" height="8"/>
+            <rect x="10" y="18" width="8" height="8"/><rect x="42" y="18" width="8" height="8"/>
+            <rect x="10" y="26" width="8" height="8"/><rect x="26" y="26" width="8" height="8"/><rect x="42" y="26" width="8" height="8"/>
+            <rect x="10" y="34" width="8" height="8"/><rect x="42" y="34" width="8" height="8"/>
+            <rect x="10" y="42" width="8" height="8"/><rect x="18" y="42" width="8" height="8"/><rect x="26" y="42" width="8" height="8"/><rect x="34" y="42" width="8" height="8"/><rect x="42" y="42" width="8" height="8"/>
+            <!-- Top-right finder -->
+            <rect x="90" y="10" width="8" height="8"/><rect x="98" y="10" width="8" height="8"/><rect x="106" y="10" width="8" height="8"/><rect x="114" y="10" width="8" height="8"/><rect x="122" y="10" width="8" height="8"/>
+            <rect x="90" y="18" width="8" height="8"/><rect x="122" y="18" width="8" height="8"/>
+            <rect x="90" y="26" width="8" height="8"/><rect x="106" y="26" width="8" height="8"/><rect x="122" y="26" width="8" height="8"/>
+            <rect x="90" y="34" width="8" height="8"/><rect x="122" y="34" width="8" height="8"/>
+            <rect x="90" y="42" width="8" height="8"/><rect x="98" y="42" width="8" height="8"/><rect x="106" y="42" width="8" height="8"/><rect x="114" y="42" width="8" height="8"/><rect x="122" y="42" width="8" height="8"/>
+            <!-- Data modules -->
+            <rect x="58" y="10" width="8" height="8"/><rect x="74" y="10" width="8" height="8"/>
+            <rect x="82" y="18" width="8" height="8"/>
+            <rect x="58" y="26" width="8" height="8"/><rect x="66" y="26" width="8" height="8"/>
+            <rect x="58" y="34" width="8" height="8"/><rect x="74" y="34" width="8" height="8"/>
+            <rect x="10" y="58" width="8" height="8"/><rect x="26" y="58" width="8" height="8"/><rect x="42" y="58" width="8" height="8"/><rect x="58" y="58" width="8" height="8"/>
+            <rect x="18" y="66" width="8" height="8"/><rect x="34" y="66" width="8" height="8"/><rect x="66" y="66" width="8" height="8"/>
+            <rect x="10" y="74" width="8" height="8"/><rect x="26" y="74" width="8" height="8"/><rect x="50" y="74" width="8" height="8"/>
+            <rect x="10" y="82" width="8" height="8"/><rect x="18" y="82" width="8" height="8"/><rect x="42" y="82" width="8" height="8"/><rect x="58" y="82" width="8" height="8"/>
+            <rect x="10" y="90" width="8" height="8"/><rect x="34" y="90" width="8" height="8"/><rect x="50" y="90" width="8" height="8"/>
+            <rect x="82" y="58" width="8" height="8"/><rect x="98" y="58" width="8" height="8"/><rect x="106" y="58" width="8" height="8"/><rect x="122" y="58" width="8" height="8"/>
+            <rect x="90" y="66" width="8" height="8"/><rect x="114" y="66" width="8" height="8"/>
+            <rect x="82" y="74" width="8" height="8"/><rect x="106" y="74" width="8" height="8"/>
+            <rect x="98" y="82" width="8" height="8"/><rect x="122" y="82" width="8" height="8"/>
+            <rect x="82" y="90" width="8" height="8"/><rect x="90" y="90" width="8" height="8"/><rect x="106" y="90" width="8" height="8"/>
+            <rect x="18" y="106" width="8" height="8"/><rect x="34" y="106" width="8" height="8"/><rect x="58" y="106" width="8" height="8"/>
+            <rect x="10" y="114" width="8" height="8"/><rect x="26" y="114" width="8" height="8"/><rect x="42" y="114" width="8" height="8"/>
+            <rect x="82" y="106" width="8" height="8"/><rect x="98" y="106" width="8" height="8"/><rect x="114" y="106" width="8" height="8"/>
+            <rect x="90" y="114" width="8" height="8"/><rect x="106" y="114" width="8" height="8"/><rect x="122" y="114" width="8" height="8"/>
+          </g>
+          <rect x="54" y="54" width="32" height="32" rx="6" fill="#25D366"/>
+          <text x="70" y="76" text-anchor="middle" font-size="18" fill="white" font-weight="bold" font-family="sans-serif">W</text>
+        </svg>
+      </div>
+
+      <p class="wa-qr-desc">Buka WhatsApp di ponsel kamu</p>
+      <p class="wa-qr-sub">Ketuk <strong>⋮ Menu</strong> → <strong>Perangkat tertaut</strong> → <strong>Tautkan perangkat</strong></p>
+
+      <button class="wa-qr-btn" style="margin-top:1rem;" onclick="refreshQR()">
+        <i class="ti ti-refresh" style="font-size:18px;" id="refresh-icon"></i>
+        Perbarui kode QR
+      </button>
+
+      <div class="wa-footer" style="margin-top:1rem;">
+        Pakai nomor? <a onclick="switchToPhone()">Masuk manual</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(el, tab) {
+    document.querySelectorAll('.wa-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('phone-form').style.display = (tab === 'phone') ? '' : 'none';
+    document.getElementById('qr-form').style.display   = (tab === 'qr')    ? '' : 'none';
+  }
+
+  function switchToQR() {
+    const tabs = document.querySelectorAll('.wa-tab');
+    tabs[0].classList.remove('active');
+    tabs[1].classList.add('active');
+    document.getElementById('phone-form').style.display = 'none';
+    document.getElementById('qr-form').style.display = '';
+  }
+
+  function switchToPhone() {
+    const tabs = document.querySelectorAll('.wa-tab');
+    tabs[1].classList.remove('active');
+    tabs[0].classList.add('active');
+    document.getElementById('qr-form').style.display = 'none';
+    document.getElementById('phone-form').style.display = '';
+  }
+
+  function togglePw() {
+    const inp = document.getElementById('pw-input');
+    const ico = document.getElementById('eye-icon').querySelector('i');
+    if (inp.type === 'password') {
+      inp.type = 'text';
+      ico.className = 'ti ti-eye-off';
+    } else {
+      inp.type = 'password';
+      ico.className = 'ti ti-eye';
+    }
+  }
+
+  function doLogin() {
+    const prog = document.getElementById('progress');
+    const bar  = document.getElementById('progress-bar');
+    prog.style.display = 'block';
+    bar.style.width = '0%';
+    setTimeout(() => bar.style.width = '40%',  100);
+    setTimeout(() => bar.style.width = '75%',  500);
+    setTimeout(() => bar.style.width = '100%', 900);
+    setTimeout(() => {
+      prog.style.display = 'none';
+      bar.style.width = '0%';
+    }, 1400);
+  }
+
+  function refreshQR() {
+    const ico = document.getElementById('refresh-icon');
+    ico.style.transition = 'transform 0.6s';
+    ico.style.transform  = 'rotate(360deg)';
+    setTimeout(() => {
+      ico.style.transition = '';
+      ico.style.transform  = '';
+    }, 700);
+  }
+</script>
+
+</body>
+</html>
