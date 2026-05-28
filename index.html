@@ -26,8 +26,6 @@ body{
   overflow-x:hidden;
 }
 
-/* HEADER */
-
 header{
   position:fixed;
   top:0;
@@ -39,7 +37,6 @@ header{
   border-bottom:1px solid rgba(255,255,255,0.2);
   z-index:1000;
   box-shadow:0 8px 30px rgba(0,0,0,0.05);
-
   opacity:0;
   transform:translateY(-40px);
   animation:navAnim 1s ease forwards;
@@ -77,8 +74,6 @@ header{
   color:#2563eb;
 }
 
-/* BUTTON */
-
 .btn{
   padding:10px 24px;
   border:none;
@@ -101,8 +96,6 @@ header{
   box-shadow:0 10px 25px rgba(37,99,235,0.25);
 }
 
-/* HERO */
-
 .hero{
   min-height:100vh;
   background:linear-gradient(135deg,#1d4ed8,#2563eb);
@@ -110,6 +103,8 @@ header{
   align-items:center;
   padding:120px 24px 60px;
   color:white;
+  position:relative;
+  overflow:hidden;
 }
 
 .hero-wrap{
@@ -121,18 +116,32 @@ header{
   align-items:center;
 }
 
+.hero-deco{
+  position:absolute;
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  width:65%;
+  max-width:640px;
+  opacity:0.6;
+  pointer-events:none;
+  z-index:0;
+  
+}
+
 .hero-text{
   opacity:0;
   transform:translateX(-80px);
   animation:textAnim 1.2s ease forwards;
   animation-delay:0.3s;
+  position:relative;
+  z-index:1;
 }
 
 .hero h1{
   font-size:3.2rem;
   line-height:1.2;
   margin-bottom:20px;
-
   animation:glowText 2s infinite alternate;
 }
 
@@ -144,11 +153,12 @@ header{
 
 .hero-image{
   perspective:1000px;
-
   opacity:0;
   transform:translateX(80px);
   animation:imageAnim 1.2s ease forwards;
   animation-delay:0.5s;
+  position:relative;
+  z-index:1;
 }
 
 .floating-card{
@@ -157,7 +167,6 @@ header{
   border-radius:30px;
   box-shadow:none;
   transition:transform .15s ease;
-
   animation:floatCard 3s ease-in-out infinite;
 }
 
@@ -167,8 +176,6 @@ header{
   display:block;
   background:transparent;
 }
-
-/* SECTION */
 
 section{
   padding:90px 24px;
@@ -186,15 +193,11 @@ section{
   font-weight:700;
 }
 
-/* GRID */
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:28px;
 }
-
-/* CARD */
 
 .card{
   background:white;
@@ -203,27 +206,15 @@ section{
   box-shadow:0 12px 30px rgba(0,0,0,0.06);
   transition:.3s;
   cursor:pointer;
-
   opacity:0;
   transform:translateY(40px);
   animation:cardAnim 1s ease forwards;
 }
 
-.card:nth-child(1){
-  animation-delay:0.3s;
-}
-
-.card:nth-child(2){
-  animation-delay:0.5s;
-}
-
-.card:nth-child(3){
-  animation-delay:0.7s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-}
+.card:nth-child(1){ animation-delay:0.3s; }
+.card:nth-child(2){ animation-delay:0.5s; }
+.card:nth-child(3){ animation-delay:0.7s; }
+.card:hover{ transform:translateY(-8px); }
 
 .card h3{
   margin-bottom:14px;
@@ -235,8 +226,6 @@ section{
   line-height:1.7;
 }
 
-/* TEACHER CARD */
-
 .teacher-card{
   background:white;
   padding:30px;
@@ -244,27 +233,15 @@ section{
   text-align:center;
   box-shadow:0 12px 30px rgba(0,0,0,0.06);
   transition:.3s;
-
   opacity:0;
   transform:translateY(40px);
   animation:teacherAnim 1s ease forwards;
 }
 
-.teacher-card:nth-child(1){
-  animation-delay:0.4s;
-}
-
-.teacher-card:nth-child(2){
-  animation-delay:0.6s;
-}
-
-.teacher-card:nth-child(3){
-  animation-delay:0.8s;
-}
-
-.teacher-card:hover{
-  transform:translateY(-8px);
-}
+.teacher-card:nth-child(1){ animation-delay:0.4s; }
+.teacher-card:nth-child(2){ animation-delay:0.6s; }
+.teacher-card:nth-child(3){ animation-delay:0.8s; }
+.teacher-card:hover{ transform:translateY(-8px); }
 
 .teacher-card img{
   width:220px;
@@ -282,11 +259,7 @@ section{
   margin-bottom:8px;
 }
 
-.teacher-card p{
-  color:#64748b;
-}
-
-/* FOOTER */
+.teacher-card p{ color:#64748b; }
 
 footer{
   background:#0f172a;
@@ -302,9 +275,7 @@ footer{
   gap:30px;
 }
 
-footer h3{
-  margin-bottom:16px;
-}
+footer h3{ margin-bottom:16px; }
 
 footer a{
   display:block;
@@ -327,320 +298,171 @@ footer a:hover{
   padding-top:20px;
 }
 
-/* KEYFRAMES */
-
 @keyframes navAnim{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  to{ opacity:1; transform:translateY(0); }
 }
 
 @keyframes textAnim{
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
+  to{ opacity:1; transform:translateX(0); }
 }
 
 @keyframes imageAnim{
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
+  to{ opacity:1; transform:translateX(0); }
 }
 
 @keyframes cardAnim{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  to{ opacity:1; transform:translateY(0); }
 }
 
 @keyframes teacherAnim{
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  to{ opacity:1; transform:translateY(0); }
 }
 
 @keyframes floatCard{
-
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-12px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
-
+  0%{ transform:translateY(0px); }
+  50%{ transform:translateY(-12px); }
+  100%{ transform:translateY(0px); }
 }
 
 @keyframes glowText{
-
-  from{
-    text-shadow:0 0 10px rgba(255,255,255,0.2);
-  }
-
-  to{
-    text-shadow:0 0 28px rgba(255,255,255,0.7);
-  }
-
+  from{ text-shadow:0 0 10px rgba(255,255,255,0.2); }
+  to{ text-shadow:0 0 28px rgba(255,255,255,0.7); }
 }
 
-/* RESPONSIVE */
+@keyframes decoFloat{
+  0%{ transform:translateY(-50%) translateX(0px); }
+  50%{ transform:translateY(-52%) translateX(10px); }
+  100%{ transform:translateY(-50%) translateX(0px); }
+}
 
 @media(max-width:900px){
-
   .hero-wrap{
     grid-template-columns:1fr;
     text-align:center;
   }
-
-  .hero h1{
-    font-size:2.3rem;
-  }
-
-  .menu{
-    display:none;
-  }
-
-  .teacher-card img{
-    width:180px;
-    height:180px;
-  }
-
+  .hero h1{ font-size:2.3rem; }
+  .menu{ display:none; }
+  .teacher-card img{ width:180px; height:180px; }
+  .hero-deco{ width:90%; opacity:0.12; }
 }
-
-</style>
 
   </style>
 </head>
 <body>
 
 <header>
-
   <div class="nav">
-
     <div class="logo">EduSchool</div>
-
     <div class="menu">
-
       <a href="#programs">Programs</a>
       <a href="#teachers">Teachers</a>
-
-      <button
-  class="btn signin-btn"
-  onclick="window.location.href='tampilan-signin.html'">
-
-  Sign In
-
-</button>
-
+      <button class="btn signin-btn" onclick="window.location.href='tampilan-signin.html'">Sign In</button>
     </div>
-
   </div>
-
 </header>
 
 <section class="hero">
 
+  <!-- DEKORASI LEKUKAN -->
+  <img src="foto1-removebg-preview.png" alt="" class="hero-deco" aria-hidden="true"/>
+
   <div class="hero-wrap">
-
     <div class="hero-text">
-
       <h1>Equipping You With Skills That Matter</h1>
-
       <p>
         Website edukasi modern dengan animasi interaktif,
         tampilan premium, dan efek gerak mengikuti kursor.
       </p>
-
       <button
         class="btn signin-btn"
         onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">
-
         Explore Now
-
       </button>
-
     </div>
 
     <div class="hero-image">
-
       <div class="floating-card" id="floatingCard">
-
-        <img
-          src="teacher4-removebg-preview.png"
-          alt="students">
-
+        <img src="teacher4-removebg-preview.png" alt="students">
       </div>
-
     </div>
-
   </div>
 
 </section>
 
 <section id="programs">
-
   <div class="container">
-
     <h2 class="section-title">Our Programs</h2>
-
     <div class="grid">
-
       <div class="card" onclick="window.location.href='english-program.html'">
-
         <h3>English with Native Speakers</h3>
-
-        <p>
-          Learn speaking, pronunciation, grammar,
-          and confidence directly with interactive teaching.
-        </p>
-
+        <p>Learn speaking, pronunciation, grammar, and confidence directly with interactive teaching.</p>
       </div>
-
       <div class="card" onclick="window.location.href='japenese-program.html'">
-
         <h3>Japanese for Mathematics</h3>
-
-        <p>
-          Master Japanese language skills combined
-          with mathematics understanding.
-        </p>
-
+        <p>Master Japanese language skills combined with mathematics understanding.</p>
       </div>
-
       <div class="card" onclick="window.location.href='corporate-program.html'">
-
         <h3>Corporate Training Program</h3>
-
-        <p>
-          Professional training for communication,
-          teamwork, and leadership.
-        </p>
-
+        <p>Professional training for communication, teamwork, and leadership.</p>
       </div>
-
     </div>
-
   </div>
-
 </section>
 
 <section id="teachers">
-
   <div class="container">
-
     <h2 class="section-title">Our Teachers</h2>
-
     <div class="grid">
-
       <div class="teacher-card">
-
         <img src="teacher1.png" alt="teacher">
-
         <h3>Tia</h3>
-
         <p>Indonesian Teacher</p>
-
       </div>
-
       <div class="teacher-card">
-
         <img src="teacher3.png" alt="teacher">
-
-        <h3>nadia</h3>
-
-        <p>Japanese Language teacher</p>
-
+        <h3>Nadia</h3>
+        <p>Japanese Language Teacher</p>
       </div>
-
       <div class="teacher-card">
-
         <img src="teacher2.png" alt="teacher">
-
-        <h3>jackson</h3>
-
-        <p>english Language teacher</p>
-
+        <h3>Jackson</h3>
+        <p>English Language Teacher</p>
       </div>
-
     </div>
-
   </div>
-
 </section>
 
 <footer>
-
   <div class="footer-wrap">
-
     <div>
-
       <h3>EduSchool</h3>
-
-      <p>
-        Interactive education landing page with modern design.
-      </p>
-
+      <p>Interactive education landing page with modern design.</p>
     </div>
-
     <div>
-
       <h3>Programs</h3>
-
-      <a href="english-program.html">
-        English with Native Speakers
-      </a>
-
-      <a href="japenese-program.html">
-        Japanese Mathematics
-      </a>
-
-      <a href="corporate-program.html">
-        Corporate Training
-      </a>
-
+      <a href="english-program.html">English with Native Speakers</a>
+      <a href="japenese-program.html">Japanese Mathematics</a>
+      <a href="corporate-program.html">Corporate Training</a>
     </div>
-
     <div>
-
       <h3>Contact</h3>
-
       <a href="tampilan -login-ig.html">Instagram</a>
       <a href="tampilan-login-wa.html">WhatsApp</a>
       <a href="tampilan-login-email.html">Email</a>
-
     </div>
-
   </div>
-
   <div class="copyright">
     © 2026 EduSchool — Interactive Landing Page
   </div>
-
 </footer>
 
 <script>
-
 const card = document.getElementById("floatingCard");
-
 document.addEventListener("mousemove", (e) => {
-
   const x = (window.innerWidth / 2 - e.pageX) / 35;
   const y = (window.innerHeight / 2 - e.pageY) / 35;
-
-  card.style.transform =
-    `rotateY(${x}deg) rotateX(${-y}deg)`;
-
+  card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
 });
-
 </script>
 
 </body>
