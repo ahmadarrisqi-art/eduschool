@@ -3,195 +3,778 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lingua — English with Native Speakers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <title>English with Native Speakers</title>
+    :root {
+      --navy:    #0d2b5e;
+      --blue:    #1a4fa3;
+      --mid:     #2563eb;
+      --sky:     #3b82f6;
+      --accent:  #fbbf24;
+      --white:   #ffffff;
+      --light:   #e8f0fe;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --radius:  16px;
+    }
 
-  <link rel="stylesheet" href="style.css">
+    html { scroll-behavior: smooth; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f6ff;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: var(--navy);
+      box-shadow: 0 2px 20px rgba(13,43,94,.35);
+    }
+
+    nav .logo {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 1.55rem;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    nav .logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: rgba(255,255,255,.75);
+      font-size: .9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--white); }
+
+    .nav-actions { display: flex; gap: .75rem; align-items: center; }
+    .btn-outline {
+      padding: .45rem 1.2rem;
+      border: 1.5px solid rgba(255,255,255,.45);
+      border-radius: 50px;
+      color: var(--white);
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .btn-solid {
+      padding: .45rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-solid:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e5fc4 100%);
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      padding: 60px 5% 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+      right: -80px; top: -100px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      right: 220px; bottom: -60px;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 3rem;
+      width: 100%;
+    }
+
+    .hero-text { flex: 1; padding-bottom: 60px; animation: fadeUp .6s ease both; }
+
+    .badge {
+      display: inline-block;
+      background: rgba(251,191,36,.18);
+      border: 1px solid rgba(251,191,36,.4);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.1rem;
+      letter-spacing: .4px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: .9rem;
+    }
+    .hero-text h1 span { color: var(--accent); }
+
+    .hero-text .sub {
+      font-size: .9rem;
+      color: rgba(255,255,255,.72);
+      font-size: .88rem;
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: .55rem;
+    }
+
+    .audience {
+      font-size: .8rem;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; }
+    .cta-primary {
+      padding: .7rem 1.8rem;
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: .9rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(251,191,36,.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(251,191,36,.45); }
+    .cta-secondary {
+      padding: .7rem 1.8rem;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: .9rem;
+      border: 1.5px solid rgba(255,255,255,.4);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .cta-secondary:hover { border-color: var(--white); }
+
+    /* hero illustration area */
+    .hero-visual {
+      flex: 0 0 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 0;
+      animation: fadeUp .7s .15s ease both;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-illus {
+      width: 100%;
+      height: auto;
+      background: transparent;
+      border-radius: var(--radius) var(--radius) 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: visible;
+    }
+
+    .hero-tag {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      border:none;
+      border-radius: 50px;
+      padding: .4rem 1.1rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(0,0,0,.0);
+    }
+
+    /* ── SECTION BASE ────────────────────────────── */
+    .section {
+      padding: 72px 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--mid);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+    .sec-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: .6rem;
+    }
+    .sec-sub {
+      font-size: .88rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    /* ── FIND BEST PROGRAM ───────────────────────── */
+    .find-section {
+      padding: 72px 5%;
+      background: var(--white);
+    }
+    .find-inner { max-width: 1100px; margin: 0 auto; }
+
+    .program-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .prog-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: var(--navy);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .prog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,43,94,.25); }
+    .prog-card.wide { grid-column: span 2; min-height: 200px; }
+
+    .prog-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: .35;
+      transition: opacity .3s;
+    }
+    .prog-card:hover .prog-bg { opacity: .45; }
+
+    .prog-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,43,94,.92) 0%, rgba(13,43,94,.3) 100%);
+    }
+
+    .prog-body { position: relative; z-index: 1; }
+    .prog-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--navy);
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .7rem;
+      border-radius: 50px;
+      margin-bottom: .5rem;
+    }
+    .prog-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: .3rem;
+    }
+    .prog-desc { font-size: .78rem; color: rgba(255,255,255,.65); }
+    .prog-btn {
+      margin-top: .75rem;
+      display: inline-block;
+      padding: .35rem 1.1rem;
+      background: var(--mid);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: .78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .prog-btn:hover { background: var(--sky); }
+
+    /* ── GLIMPSE / VIDEO ─────────────────────────── */
+    .glimpse-section {
+      padding: 72px 5%;
+      background: #f0f6ff;
+    }
+    .glimpse-inner { max-width: 1100px; margin: 0 auto; }
+
+    .tab-row {
+      display: flex;
+      gap: .75rem;
+      margin: 1.8rem 0;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: .45rem 1.2rem;
+      border-radius: 50px;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all .15s;
+    }
+    .tab.active { background: var(--mid); color: var(--white); }
+    .tab:not(.active) { border-color: var(--mid); color: var(--mid); background: transparent; }
+    .tab:not(.active):hover { background: var(--light); }
+
+    .video-card {
+      border-radius: var(--radius);
+      background: var(--navy);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 16/7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      opacity: .8;
+    }
+    .play-btn {
+      position: relative;
+      z-index: 1;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25);
+      transition: transform .15s;
+    }
+    .play-btn:hover { transform: scale(1.08); }
+    .play-btn svg { margin-left: 4px; }
+
+    .video-footer {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: .82rem;
+      padding: .4rem 1.4rem;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(251,191,36,.4);
+    }
+
+    /* ── TEACHERS ────────────────────────────────── */
+    .teachers-section {
+      padding: 72px 5%;
+      background: var(--white);
+    }
+    .teachers-inner { max-width: 1100px; margin: 0 auto; }
+
+    .teachers-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .teacher-card {
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      border-radius: var(--radius);
+      padding: 1.5rem 1.2rem 1.3rem;
+      text-align: center;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .teacher-card:hover { box-shadow: 0 10px 28px rgba(37,99,235,.12); transform: translateY(-4px); }
+
+    .teacher-card img {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--mid);
+      margin-bottom: 1rem;
+    }
+    .teacher-card h4 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      color: var(--navy);
+      margin-bottom: .3rem;
+    }
+    .teacher-role {
+      font-size: .75rem;
+      color: var(--mid);
+      font-weight: 600;
+      margin-bottom: .5rem;
+      letter-spacing: .3px;
+    }
+    .teacher-card p {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* personality tags */
+    .tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; justify-content: center; }
+    .ptag {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .2rem .7rem;
+      border-radius: 50px;
+      background: var(--light);
+      color: var(--mid);
+    }
+    .ptag.curious  { background: #fef9c3; color: #92400e; }
+    .ptag.confident{ background: #dcfce7; color: #166534; }
+    .ptag.caring   { background: #fce7f3; color: #9d174d; }
+
+    /* ── CTA BANNER ──────────────────────────────── */
+    .cta-banner {
+      margin: 0 5% 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--mid) 100%);
+      padding: 3rem 4%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      right: -60px; top: -80px;
+    }
+    .cta-banner-text h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: .4rem;
+    }
+    .cta-banner-text p { font-size: .88rem; color: rgba(255,255,255,.7); }
+
+    .cta-banner-btn {
+      padding: .75rem 2rem;
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 18px rgba(251,191,36,.35);
+      transition: transform .15s, box-shadow .15s;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-banner-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(251,191,36,.5); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 1.4rem;
+      font-size: .8rem;
+    }
+    footer span { color: rgba(255,255,255,.8); font-weight: 600; }
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column; }
+      .hero-visual { flex: none; width: 100%; }
+      .hero-illus { height: 220px; }
+      .program-grid { grid-template-columns: 1fr; }
+      .prog-card.wide { grid-column: span 1; }
+      nav ul { display: none; }
+      .cta-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
-
 <body>
 
-  <!-- NAVBAR -->
+<!-- ── NAVBAR ── -->
+<nav>
+  <div class="logo">Eduschool<span>.</span></div>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#programs">Our Programs</a></li>
+    <li><a href="#teachers">Blog &amp; Social</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-solid">Sign up</button>
+    <button class="btn-outline">Sign in</button>
+  </div>
+</nav>
 
-  <nav>
-
-    <h1>Lingua.</h1>
-
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#programs">Programs</a></li>
-      <li><a href="index.html#teachers">Teachers</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-
-  </nav>
-
-  <!-- HERO -->
-
-  <section class="hero">
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
 
     <div class="hero-text">
-
-      <div class="badge">
-        Premium Learning Program ✨
-      </div>
-
-      <h1>
-        English with <br>
-        Native Speakers
-      </h1>
-
-      <p>
+      <div class="badge">Premium Learning Program ✨</div>
+      <h1>English with<br><span>Native Speakers</span></h1>
+      <p class="sub">
         Learn English confidently through interactive speaking sessions,
         native-style communication, and modern classroom experiences.
       </p>
-
-      <button class="hero-btn"
-      onclick="window.location.href='join-class-english.html'">
-        Join Class
-      </button>
-
+      <p class="audience">For Children and Teenagers</p>
+      <div class="hero-cta">
+        <button class="cta-primary" onclick="window.location.href='join-class-english.html'">
+          Book a class →
+        </button>
+        <button class="cta-secondary">Learn more</button>
+      </div>
     </div>
 
-    <div class="hero-img">
+    <div class="hero-visual">
+      <div class="hero-illus">
+        <!-- Decorative illustration placeholder — swap for your anime SVG -->
+        <div style="position:relative;">
+          <img src="foto2.png"
+          alt="heo image"
+          style="width:130%; height:auto;
+          object-fit:cover; display:block;
+          margin-bottom: 60px;
+          margin-left: -75px;">
+          
+        </div>
+        <div style="position:absolute;inset:0;
+        z-index:1; display:flex;
+        align-items:center;">
+          </div>
+        <div style="position:relative;z-index:1;"></div>
+      </div>
+    </div>
 
-      <div class="img-card">
+  </div>
+</section>
 
-        <img
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-          alt="students">
+<!-- ── FIND THE BEST PROGRAM ── -->
+<div class="find-section" id="programs">
+  <div class="find-inner">
+    <div class="sec-label">Explore</div>
+    <div class="sec-title">Find The Best Program For You</div>
+    <p class="sec-sub">Choose the learning path that fits your schedule and goals.</p>
 
+    <div class="program-grid">
+
+      <!-- Card wide: EduSchool Center -->
+      <div class="prog-card wide">
+        <div class="prog-bg" style="background-image:url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900');"></div>
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <span class="prog-tag">On-Site</span>
+          <div class="prog-title">EduSchool Center</div>
+          <div class="prog-desc">Your gateway to a world-class English learning environment. Fully equipped classrooms and native mentors.</div>
+          <a href="#" class="prog-btn">Join Now</a>
+        </div>
+      </div>
+
+      <!-- Card: Belajar by EduSchool -->
+      <div class="prog-card">
+        <div class="prog-bg" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600');"></div>
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <span class="prog-tag">Hybrid</span>
+          <div class="prog-title">Belajar by EduSchool</div>
+          <div class="prog-desc">Flexible blended learning combining the best of online and offline.</div>
+          <a href="#" class="prog-btn">Join Now</a>
+        </div>
+      </div>
+
+      <!-- Card: EduSchool Online -->
+      <div class="prog-card">
+        <div class="prog-bg" style="background-image:url('https://images.unsplash.com/photo-1588072432836-e10032774350?w=600');"></div>
+        <div class="prog-overlay"></div>
+        <div class="prog-body">
+          <span class="prog-tag">Online</span>
+          <div class="prog-title">EduSchool Online</div>
+          <div class="prog-desc">Study from anywhere with live classes and self-paced materials.</div>
+          <a href="#" class="prog-btn">Join Now</a>
+        </div>
       </div>
 
     </div>
+  </div>
+</div>
 
-  </section>
+<!-- ── GLIMPSE AT PROGRAMS ── -->
+<div class="glimpse-section">
+  <div class="glimpse-inner">
+    <div class="sec-label">Preview</div>
+    <div class="sec-title">Take a Glimpse at Our Programs</div>
 
-  <!-- FEATURES -->
-
-  <section class="section">
-
-    <div class="title">
-      <h2>Why Choose Us</h2>
-      <p>Modern learning experience for students and teenagers</p>
+    <div class="tab-row">
+      <button class="tab active">EduSchool Center</button>
+      <button class="tab">EduSchool Online</button>
+      <button class="tab">Rumah Belajar EduSchool</button>
     </div>
 
-    <div class="cards">
-
-      <div class="card">
-        <h3>Speaking Practice</h3>
-        <p>
-          Practice real-life English conversations with confidence and fluency.
-        </p>
+    <div class="video-card">
+      <div class="video-bg"></div>
+      <div class="play-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <polygon points="5,3 19,12 5,21" fill="#1a4fa3"/>
+        </svg>
       </div>
-
-      <div class="card">
-        <h3>Native Style Learning</h3>
-        <p>
-          Learn pronunciation, accent, and natural communication flow.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Interactive Class</h3>
-        <p>
-          Fun modern activities, projects, games, and discussion sessions.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>International Standard</h3>
-        <p>
-          Curriculum designed for global communication and future success.
-        </p>
-      </div>
-
+      <div class="video-footer">EduSchool Center &nbsp;→&nbsp; Join Now</div>
     </div>
+  </div>
+</div>
 
-  </section>
+<!-- ── TEACHERS ── -->
+<div class="teachers-section" id="teachers">
+  <div class="teachers-inner">
+    <div class="sec-label">Our Team</div>
+    <div class="sec-title">Meet Our Teachers</div>
+    <p class="sec-sub">Encouraging learners to build the habit of asking great questions — and not just memorizing the answers.</p>
 
-  <!-- TEACHERS -->
-
-  <section class="section teacher-section">
-
-    <div class="title">
-      <h2>Our Teachers</h2>
-      <p>Experienced and friendly native-level mentors</p>
-    </div>
-
-    <div class="teachers">
+    <div class="teachers-grid">
 
       <div class="teacher-card">
-
-        <img
-          src="https://randomuser.me/api/portraits/women/44.jpg"
-          alt="teacher">
-
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Wilson">
         <h4>Sarah Wilson</h4>
-
-        <p>
-          Native English Mentor with 8+ years teaching experience.
-        </p>
-
+        <div class="teacher-role">Native English Mentor</div>
+        <p>8+ years teaching experience. Passionate about speaking and communication.</p>
+        <div class="tag-list">
+          <span class="ptag curious">Curious</span>
+          <span class="ptag confident">Confident</span>
+        </div>
       </div>
 
       <div class="teacher-card">
-
-        <img
-          src="https://randomuser.me/api/portraits/men/32.jpg"
-          alt="teacher">
-
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Lee">
         <h4>Michael Lee</h4>
-
-        <p>
-          Speaking and pronunciation specialist for teenagers.
-        </p>
-
+        <div class="teacher-role">Pronunciation Specialist</div>
+        <p>Accent &amp; pronunciation coach for teenagers. 6+ years of impact.</p>
+        <div class="tag-list">
+          <span class="ptag confident">Confident</span>
+          <span class="ptag caring">Caring</span>
+        </div>
       </div>
 
       <div class="teacher-card">
-
-        <img
-          src="https://randomuser.me/api/portraits/women/65.jpg"
-          alt="teacher">
-
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emma Brown">
         <h4>Emma Brown</h4>
+        <div class="teacher-role">Communication Mentor</div>
+        <p>Interactive, fun classes that build real-world confidence and fluency.</p>
+        <div class="tag-list">
+          <span class="ptag caring">Caring</span>
+          <span class="ptag curious">Curious</span>
+        </div>
+      </div>
 
-        <p>
-          Interactive communication and confidence building mentor.
-        </p>
-
+      <div class="teacher-card">
+        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="James Carter">
+        <h4>James Carter</h4>
+        <div class="teacher-role">Academic English Tutor</div>
+        <p>Specializes in IELTS prep, writing skills, and academic English for teens.</p>
+        <div class="tag-list">
+          <span class="ptag confident">Confident</span>
+          <span class="ptag curious">Curious</span>
+        </div>
       </div>
 
     </div>
+  </div>
+</div>
 
-  </section>
+<!-- ── CTA BANNER ── -->
+<div style="max-width:1100px;margin:0 auto;">
+  <div class="cta-banner">
+    <div class="cta-banner-text">
+      <h2>Start Your English Journey Today</h2>
+      <p>Join thousands of students improving their communication skills worldwide.</p>
+    </div>
+    <button class="cta-banner-btn">Book a Free Trial →</button>
+  </div>
+</div>
 
-  <!-- CTA -->
+<!-- ── FOOTER ── -->
+<footer>
+  © 2025 <span>Lingua.</span> All Rights Reserved.
+</footer>
 
-  <section class="cta">
-
-    <h2>
-      Start Your English Journey Today
-    </h2>
-
-    <p>
-      Join thousands of students improving their communication skills.
-    </p>
-
-    <button class="hero-btn">
-      Book a Free Trial
-    </button>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer>
-    © 2025 Lingua. All Rights Reserved.
-  </footer>
+<script>
+  // Simple tab switcher for glimpse section
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
